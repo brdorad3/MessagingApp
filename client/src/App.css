@@ -13,3 +13,11 @@
 .bbw{
     border-bottom: solid 1px white;
 }
+@media screen and (max-width:950px) {
+    .width{
+        width: 10%;
+    }
+}
+.btw{
+    border-top: solid 1px white;
+}
