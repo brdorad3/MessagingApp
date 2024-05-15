@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 #root{
-    
+    display: flex;
     width: 100vw;
     height: 100vh;
+    
 }
 .width{
     width: 6%;
@@ -21,3 +22,24 @@
 .btw{
     border-top: solid 1px white;
 }
+.gb{
+    border: solid 2px #324f2f;
+    box-shadow: 5px 2px 10px #324f2f;
+}
+.greyb{
+border: 2px ridge rgb(189, 183, 183);
+}
+div::-webkit-scrollbar {
+    width: 10px;
+    
+    
+  }
+  div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(226, 194, 9, 0.3);
+    background-color: #b7bbb7;
+  }
+  div::-webkit-scrollbar-thumb {
+    background-color: rgb(102, 101, 102);
+    border-radius: 50px;
+    
+  }
