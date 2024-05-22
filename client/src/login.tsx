@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom"
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = async(e: React.FormEvent) => {
+        e.preventDefault();
+
+        try{
+            const res = await axios.post("http://localhost:3000/login", {username, password});
+            const { token, username: loggedInUsername } = res.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem("username", loggedInUsername)
+            navigate("/")
+        }catch (error) {
+            console.error('Login failed', error);
+    }}
 
     return(
         <>
@@ -10,14 +29,22 @@ function Login(){
         <h1>Log in</h1>
                 </div>
                 
-                    <form action="#" className="flex flex-col items-center h-full gap-5">
+                    <form action="#" onSubmit={handleLogin} className="flex flex-col items-center h-full gap-5">
                         <div className="flex flex-col">
-                        <label htmlFor="user" className="text-white">Username: </label>
-                        <input type="text" id="user" className="self-center h-7 rounded-sm" placeholder="Bob"/>
+                        <label htmlFor="username" className="text-white">Username: </label>
+                        <input type="text"
+                        name="username"
+                        value={username}
+                        onChange={(e)=> setUsername(e.target.value)}
+                        id="username" className="self-center h-7 rounded-sm" placeholder="Bob"/>
                         </div>
-                        <div className="flex flex-col text-white">
-                        <label htmlFor="pass">Password: </label>
-                        <input type="password" id="pass" className="self-start h-7 rounded-sm" placeholder="********"/>
+                        <div className="flex flex-col ">
+                        <label htmlFor="password" className="text-white">Password: </label>
+                        <input type="password"
+                        name="password"
+                        value={password}
+                        onChange={(e)=> setPassword(e.target.value)}
+                        id="password" className="self-start h-7 rounded-sm" placeholder="********"/>
                         </div>
                         <div className="flex gap-8 items-center mt-7 ">
                         <button className="text-white border-2 border-white px-2 py-1">Confirm</button>

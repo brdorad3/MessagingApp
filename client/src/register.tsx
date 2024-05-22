@@ -11,19 +11,20 @@ function Register(){
 
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
-    }
+    
 
     try {
-        const response = await axios.post('/register', { username, password, confirm });
+        const response = await axios.post('http://localhost:3000/register', { username, password, confirm });
+        console.log(username)
         setMessage(response.data.message);
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           setMessage(error.response.data.error || 'Registration failed');
         } else {
-          setMessage('Registration failed');
+          setMessage('Registration failed!');
         }
       }
-    
+    }
 
     return(
         <div className="w-screen h-screen flex items-center justify-center">
@@ -35,15 +36,26 @@ function Register(){
                     <form action="#" className="flex flex-col items-center h-full gap-5" onSubmit={handleSubmit}>
                         <div className="flex flex-col">
                         <label htmlFor="user" className="text-white">Username: </label>
-                        <input type="text" name="username" id="user" className="self-center h-7 rounded-sm" placeholder="Bob" onChange={(e) => setUsername(e.target.value)} value={username} required/>
+                        <input type="text"
+                        minLength={5}
+                        maxLength={25}
+                         name="username" id="user" className="self-center h-7 rounded-sm" placeholder="Bob" onChange={(e) => setUsername(e.target.value)} value={username} required/>
                         </div>
-                        <div className="flex flex-col text-white">
-                        <label htmlFor="pass">Password: </label>
-                        <input type="password" id="pass" className="self-start h-7 rounded-sm" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                        <div className="flex flex-col ">
+                        <label htmlFor="pass" className="text-white">Password: </label>
+                        <input type="password"
+                         name="password"
+                         minLength={8}
+                         maxLength={25}
+                         id="pass" className="self-start h-7 rounded-sm" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                         </div>
-                        <div className="flex flex-col text-white">
-                        <label htmlFor="confirm">Confirm Password: </label>
-                        <input type="password" id="confirm" className="self-start h-7 rounded-sm" placeholder="********" value={confirm} onChange={(e) => setConfirm(e.target.value)} required/>
+                        <div className="flex flex-col ">
+                        <label htmlFor="confirm" className="text-white" >Confirm Password: </label>
+                        <input type="password"
+                         name="confirm"
+                         minLength={8}
+                         maxLength={25}
+                         id="confirm" className="self-start h-7 rounded-sm" placeholder="********" value={confirm} onChange={(e) => setConfirm(e.target.value)} required/>
                         </div>
                         <div className="flex gap-10 items-center">
                         <button type="submit" className="mt-2 text-white border-2 border-white px-2 py-1">Confirm</button>

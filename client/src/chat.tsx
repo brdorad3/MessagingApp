@@ -1,15 +1,17 @@
 import Icon from '@mdi/react';
 import { mdiSend } from '@mdi/js';
 import { mdiAccountCircle } from '@mdi/js';
+import WelcomeComponent from './testcomp';
+
 
 function Chat(){
-
+    
 
     return (
         <div className="w-full h-screen">
         <div className="h-1/6 flex items-center pl-10 gap-2">
         <Icon path={mdiAccountCircle} color="black" size={2}/>
-        <p>brdorad3</p>
+        <WelcomeComponent></WelcomeComponent>
         </div>
         <div className="h-5/6 flex flex-col items-center justify-center bg-slate-200 mx-5 rounded-lg">
         <div className="w-full h-4/5">all</div>

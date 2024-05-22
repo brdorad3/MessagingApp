@@ -13,7 +13,7 @@ const userSchema = new Schema({
     },
     confirm: {
         type: String,
-        required: true
+        required: false
     }
 })
 
