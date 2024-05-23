@@ -2,24 +2,35 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from './userContext';
 
-function Login(){
+const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setUser } = useUserContext();
 
     const handleLogin = async(e: React.FormEvent) => {
         e.preventDefault();
-
-        try{
-            const res = await axios.post("http://localhost:3000/login", {username, password});
-            const { token, username: loggedInUsername } = res.data;
+        const response = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+          });
+      
+          if (response.ok) {
+            const { token } = await response.json();
+            // Save token and user info in the context
+            setUser({ username });
             localStorage.setItem('token', token);
-            localStorage.setItem("username", loggedInUsername)
-            navigate("/")
-        }catch (error) {
-            console.error('Login failed', error);
-    }}
+            navigate('/');
+          } else {
+            console.error('Login failed');
+          }
+        };
+      
 
     return(
         <>

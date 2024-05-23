@@ -13,6 +13,7 @@ import { UserDocument } from './models/user';
 import { Error } from 'mongoose';
 import cors from "cors"
 import {body, validationResult} from "express-validator"
+import "./authMiddleware"
 
 
 const app = express();
@@ -32,8 +33,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions))
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
-app.use(passport.session());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(passport.initialize());
@@ -76,7 +76,7 @@ app.post('/login', (req, res, next) => {
     if (err || !user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
-    const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
     return res.json({ token, username: user.username });
   })(req, res, next);
 });

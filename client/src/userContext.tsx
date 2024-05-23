@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode, FC } from 'react';
+import React, { createContext, useState, useEffect, ReactNode, FC, useContext } from 'react';
 
 interface User {
   username: string;
@@ -24,11 +24,19 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const username = localStorage.getItem('username');
-    if (username) {
-      setUser({ username });
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -36,3 +44,6 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
     </UserContext.Provider>
   );
 };
+
+// Custom hook to use the UserContext
+export const useUserContext = () => useContext(UserContext);

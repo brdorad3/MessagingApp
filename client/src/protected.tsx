@@ -1,16 +1,22 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { FC } from 'react';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = !!localStorage.getItem('token');
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-  );
+import { Navigate } from 'react-router-dom';
+import { useUserContext } from './userContext';
+
+
+interface ProtectedRouteProps {
+  children: JSX.Element;
+}
+
+
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
+  const { user } = useUserContext();
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;
