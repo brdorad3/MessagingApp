@@ -7,6 +7,7 @@ import Login from './login.tsx';
 import ProtectedComponent from './procomp.tsx';
 import ProtectedRoute from './protected.tsx';
 import { UserProvider } from './userContext.tsx';
+import Profile from './profile.tsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
   },
   {
     path: '/protected',

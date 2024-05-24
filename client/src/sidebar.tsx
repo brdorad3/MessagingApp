@@ -5,6 +5,7 @@ import { mdiAccountCircle } from '@mdi/js';
 import { mdiStarOutline } from '@mdi/js';
 import { mdiChartBar } from '@mdi/js';
 import { mdiHomeOutline } from '@mdi/js';
+import { Link } from 'react-router-dom';
 
 
 function Sidebar(){
@@ -26,7 +27,10 @@ function Sidebar(){
     </div>
     <div className='h-1/5 flex items-center justify-center  '>
 
+<Link to="/profile" className='h-1/5 flex items-center justify-center '>
     <Icon path={mdiAccountCircle} color="white" className='w-1/2 ' />
+</Link>
+    
 
     </div>
     </div>
