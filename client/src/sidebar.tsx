@@ -18,8 +18,9 @@ function Sidebar(){
     <Icon path={mdiAlphaA}  color="white" className='bbw w-11/12 '/>
 
     <div className='flex flex-col items-center h-4/5 justify-evenly'>
-
+    <Link to="/" className='flex items-center justify-center'>
     <Icon path={mdiHomeOutline} color="white" className='w-2/5 ' />
+    </Link>
     <Icon path={mdiMessageText} color="white" className='w-1/3 ' />
     <Icon path={mdiStarOutline} color="white" className='w-1/3 ' />
     <Icon path={mdiChartBar} color="white" className='w-1/3 ' />
