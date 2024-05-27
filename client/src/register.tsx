@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState('');
+    const navigate = useNavigate();
     const [message, setMessage] = useState('');
 
 
@@ -17,6 +19,7 @@ function Register(){
         const response = await axios.post('http://localhost:3000/register', { username, password, confirm });
         console.log(username)
         setMessage(response.data.message);
+        navigate("/login")
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           setMessage(error.response.data.error || 'Registration failed');

@@ -7,8 +7,12 @@ const register = asyncHandler(async(req: Request, res: Response, next: NextFunct
 const register_get = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     res.send("kontakt")
 })
+const about_post = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body.about)
+})
 
 export {
     register,
-    register_get
+    register_get,
+    about_post
 }
