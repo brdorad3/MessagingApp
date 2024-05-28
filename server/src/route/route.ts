@@ -9,7 +9,7 @@ const router = Router()
 router.get("/", test)
 //router.post("/register", register);
 router.get("/register",  register_get)
-router.post("/about", about_post)
+router.post("/:id/about", about_post)
 
 
 export default router

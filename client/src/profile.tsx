@@ -10,7 +10,9 @@ const Profile = () => {
     const { user } = useContext(UserContext);
     const [toggle, setToggle] = useState(false)
     const [about, setAbout] = useState('')
-
+    const [msg, setMsg] = useState('')
+    
+    
     const handleClick = () => {
         setToggle(!toggle)
     }
@@ -19,8 +21,9 @@ const Profile = () => {
         const formData = {about}
         setToggle(!toggle)
         try{
-           const response =  await axios.post("http://localhost:3000/about", formData)
-           console.log(about)
+           const response =  await axios.post(`http://localhost:3000/${user._id}/about`, formData)
+           setMsg(response.data.about_me)
+           console.log(msg)
            console.log(response)
 
         }
@@ -45,7 +48,7 @@ const Profile = () => {
     <div className='flex flex-col gap-10'>
         <h1 className='font-black text-3xl border-b-2 border-black'>About me</h1>
         <div className='w-2/3 sm:w-4/5 flex gap-8'>
-            {about ? <p>{about}</p>: <p>Write something about yourself</p>}
+            {msg ? <p>{msg}</p>: <p>Write something about yourself</p>}
         
         <div onClick={handleClick}>
         <Icon path={mdiPencil} size={1}  className='self-start'/>

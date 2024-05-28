@@ -21,9 +21,9 @@ const Login: React.FC = () => {
           });
       
           if (response.ok) {
-            const { token } = await response.json();
+            const { token, user } = await response.json();
             // Save token and user info in the context
-            setUser({ username });
+            setUser(user);
             localStorage.setItem('token', token);
             navigate('/');
           } else {
