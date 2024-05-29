@@ -29,5 +29,6 @@ export interface UserDocument extends Document {
     password: string;
     confirm: string;
     about_me: string;
+    profile_picture: string;
   }
   export default mongoose.model<UserDocument>('User', userSchema);

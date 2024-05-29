@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user";
 import asyncHandler from "express-async-handler"
+const multer = require('multer');
 
 const register = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     console.log("kontakt")
@@ -25,8 +26,13 @@ const about_post = asyncHandler(async (req: Request, res: Response, next: NextFu
     }
 });
 
+
+
+
+
 export {
     register,
     register_get,
-    about_post
+    about_post,
+    
 }

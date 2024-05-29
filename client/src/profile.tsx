@@ -47,12 +47,7 @@ const Profile = () => {
             <Sidebar></Sidebar>
             
             <div className='w-screen p-16 flex flex-col gap-14'>
-                <div className='flex gap-7'>
-    <Icon path={mdiAccountCircle} color="black" size={4} />
-    {user &&
-    <p className='text-2xl pb-7 self-end'>{user.username}</p>
-    }
-    </div>
+            <Image  ></Image>
     <div className='flex flex-col gap-10'>
         <h1 className='font-black text-3xl border-b-2 border-black'>About me</h1>
         <div className='w-2/3 sm:w-4/5 flex gap-8'>
@@ -64,7 +59,7 @@ const Profile = () => {
         </div>
     </div>
         </div>
-<Image></Image>
+
         </div>
         <form className={toggle ? 'normal' : 'none'} onSubmit={handleSubmit} >
         <div className='w-full px-5 border-b-2 flex items-center h-1/3 justify-between'>
