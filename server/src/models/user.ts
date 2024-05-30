@@ -1,3 +1,4 @@
+import { Schema } from "express-validator";
 import mongoose, { Document} from "mongoose";
 
 const Schema = mongoose.Schema;
@@ -17,7 +18,13 @@ const userSchema = new Schema({
     },
     about_me:{
         type: String
-    }
+    },
+    contacts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+        ]
 })
 
 userSchema.virtual("url").get(function(){
@@ -30,5 +37,6 @@ export interface UserDocument extends Document {
     confirm: string;
     about_me: string;
     profile_picture: string;
+    contacts: Object;
   }
   export default mongoose.model<UserDocument>('User', userSchema);

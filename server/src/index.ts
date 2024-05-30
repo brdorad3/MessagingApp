@@ -48,20 +48,26 @@ app.post('/register',[
         throw new Error("Username is already in use");
     }
 }).escape(),
-  body("password").isLength({min:8, max: 25}).escape().withMessage("Password must be specified"),
+  body("password").isLength({min:8, max: 25}).escape().withMessage("Password must be specified").isStrongPassword().withMessage("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."),
+  body("confirm").custom((value, { req }) => {
+    if (value !== req.body.password) {
+        throw new Error('Passwords do not match');
+    }
+    return true;
+}),
   async (req: Request, res: Response) => {
 
     const errors = validationResult(req);
         if(!errors.isEmpty()){
             console.log(errors)
-            res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
 
     console.log(req.body)
-    const { username, password } = req.body;
+    const { username, password, confirm } = req.body;
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new User({ username, password: hashedPassword });
+      const newUser = new User({ username, password: hashedPassword, confirm });
       await newUser.save();
       res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {

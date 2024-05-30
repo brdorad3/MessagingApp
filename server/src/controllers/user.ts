@@ -12,11 +12,12 @@ const register_get = asyncHandler(async(req: Request, res: Response, next: NextF
 const about_post = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const user = await User.findById(req.params.id);
+        const user2 = await User.find({username: 'brdorad'});
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
         }
-
+        user.contacts = user2; 
         user.about_me = req.body.about;
         await user.save();
         console.log(user)
