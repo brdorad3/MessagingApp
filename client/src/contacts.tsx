@@ -7,11 +7,14 @@ import axios from "axios";
 
 
 function Contacts(){
-    const [search, setSearch] = useState(''); 
+    const [search, setSearch] = useState({}); 
+    const [response, setResponse] = useState({});
 
     const handleClick = async() => {
         try{
-            const res = await axios.post("http://localhost:3000/contacts");
+            const res = await axios.post("http://localhost:3000/contacts", {search});
+            setResponse(res.data);
+           // console.log(response)
         }catch(e){
             console.log(e)
         }
@@ -25,16 +28,18 @@ function Contacts(){
         <input type="text"
         id="search"
         onChange={(e)=>setSearch(e.target.value)}
+        minLength={2}
+        maxLength={30}
         name="search"
         placeholder="Search..."
-        className="self-start rounded-lg greyb h-12 px-3"/>
+        className="self-start rounded-lg greyb h-12 pl-3 pr-8"/>
 
         <div className="absolute top-6 right-5" onClick={handleClick}>
         <Icon path={mdiMagnify} size={1}  />
         </div>
         </div>
         
-        <Contact/>
+        <Contact contactInfo = {response} />
         
         
         </div>
