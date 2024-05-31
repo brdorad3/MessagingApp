@@ -27,7 +27,13 @@ const about_post = asyncHandler(async (req: Request, res: Response, next: NextFu
     }
 });
 
-
+const add_contact = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+res.send("ww");
+})
+const fetch_user_data = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.params.id).populate("contacts");
+    res.send(user)
+})
 
 
 
@@ -35,5 +41,7 @@ export {
     register,
     register_get,
     about_post,
+    add_contact,
+    fetch_user_data
     
 }
