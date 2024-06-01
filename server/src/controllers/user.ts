@@ -29,7 +29,7 @@ const about_post = asyncHandler(async (req: Request, res: Response, next: NextFu
 
 const add_contact = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     const user = await User.find({username: req.body.search})
-    user.length > 0 ? res.send(user) : res.send("User not found")
+    user.length > 0 ? res.send(user) : res.send([])
 })
 const fetch_user_data = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     const user = await User.findById(req.params.id).populate("contacts");
