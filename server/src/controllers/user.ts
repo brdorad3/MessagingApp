@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user";
 import asyncHandler from "express-async-handler"
+import mongoose from "mongoose";
 const multer = require('multer');
 
 const register = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
@@ -12,12 +13,10 @@ const register_get = asyncHandler(async(req: Request, res: Response, next: NextF
 const about_post = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const user = await User.findById(req.params.id);
-        const user2 = await User.find({username: 'brdorad'});
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
         }
-        user.contacts = user2; 
         user.about_me = req.body.about;
         await user.save();
         console.log(user)
@@ -35,7 +34,23 @@ const fetch_user_data = asyncHandler(async(req: Request, res: Response, next: Ne
     const user = await User.findById(req.params.id).populate("contacts");
     res.send(user)
 })
-
+const update_contacts = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body.contactInfo[0].username)
+    const user = await User.findById(req.params.id);
+    const user2 = await User.find({username: req.body.contactInfo[0].username})
+    const contactId = user2[0]._id as mongoose.Types.ObjectId
+    console.log(user)
+    console.log(user2)
+    
+    if (!user?.contacts.includes(contactId)) {
+        user?.contacts.push(contactId); // Add contact ID to user's contacts array
+        await user?.save(); // Save the updated user document
+        res.status(200).json(user);
+    } else {
+        res.status(400).json({ message: 'Contact already exists' });
+    }
+   
+})
 
 
 export {
@@ -43,6 +58,7 @@ export {
     register_get,
     about_post,
     add_contact,
-    fetch_user_data
+    fetch_user_data,
+    update_contacts
     
 }

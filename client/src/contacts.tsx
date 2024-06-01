@@ -33,7 +33,7 @@ function Contacts(){
         minLength={2}
         maxLength={30}
         name="search"
-        placeholder="Search..."
+        placeholder="Search users..."
         className="self-start rounded-lg greyb h-12 pl-3 pr-8"/>
 
         <div className="absolute top-6 right-5" onClick={handleClick}>

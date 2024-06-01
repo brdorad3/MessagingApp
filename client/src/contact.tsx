@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
+import axios from 'axios';
 
 function Contact({contactInfo}){
     const { user } = useContext(UserContext);
     const [info, setInfo] = useState({})
 
-    const handleClick = () => {
-        console.log("byee")
+    const handleClick = async() => {
+        await axios.post(`http://localhost:3000/${user._id}/update`, {contactInfo})
     }
 
     const fetchData = async() => {
@@ -22,7 +23,7 @@ function Contact({contactInfo}){
     
     useEffect(()=>{
         fetchData()
-    }, [])
+    }, [contactInfo])
 
 contactInfo && console.log(contactInfo)
     return(
