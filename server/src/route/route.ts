@@ -6,6 +6,7 @@ import { about_post } from "../controllers/user"
 import { add_contact } from "../controllers/user"
 import { fetch_user_data } from "../controllers/user"
 import { update_contacts } from "../controllers/user"
+import { message_post } from "../controllers/message"
 
 const router = Router()
 
@@ -16,6 +17,7 @@ router.post("/:id/about", about_post)
 router.post("/contacts", add_contact)
 router.get("/:id/fetch", fetch_user_data)
 router.post("/:id/update", update_contacts)
+router.post("/:id/message", message_post)
 
 
 export default router
