@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
 import axios from 'axios';
+import { useChat } from './chatContext';
 
 function Contact({contactInfo}){
     const { user } = useContext(UserContext);
-    const [info, setInfo] = useState({})
+    const [info, setInfo] = useState({});
+    const { setChat } = useChat();
 
     const handleClick = async() => {
         await axios.post(`http://localhost:3000/${user._id}/update`, {contactInfo})
@@ -20,12 +22,16 @@ function Contact({contactInfo}){
             console.log(e)
         }
     }
+    const handleChats = (e) => {
+setChat(e.target.innerText)
+
+    }
     
     useEffect(()=>{
         fetchData()
     }, [contactInfo])
 
-contactInfo && console.log(contactInfo)
+
     return(
         
         <div className="flex flex-col gap-10 w-full justify-center items-center ">
@@ -41,7 +47,7 @@ contactInfo && console.log(contactInfo)
             )}
             {info.contacts && info.contacts.length > 0 ? (
                 info.contacts.map((i) => (
-                    <div key={i._id} className="w-4/5 gb h-20 rounded-xl">
+                    <div key={i._id} className="w-4/5 gb h-20 rounded-xl" onClick={(e)=>handleChats(e)}>
                         <p>{i.username}</p>
                     </div>
                 ))

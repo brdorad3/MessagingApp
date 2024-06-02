@@ -25,7 +25,7 @@ function Contacts(){
 
 
     return (
-        <div className="w-1/4 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden">
+        <div className="w-1/3 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden">
             <div className="p-3 relative">
         <input type="text"
         id="search"
