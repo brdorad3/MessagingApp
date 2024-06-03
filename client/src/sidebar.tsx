@@ -6,6 +6,7 @@ import { mdiStarOutline } from '@mdi/js';
 import { mdiChartBar } from '@mdi/js';
 import { mdiHomeOutline } from '@mdi/js';
 import { Link } from 'react-router-dom';
+import Logout from "./logout"
 
 
 function Sidebar(){
@@ -24,7 +25,7 @@ function Sidebar(){
     <Icon path={mdiMessageText} color="white" className='w-1/3 ' />
     <Icon path={mdiStarOutline} color="white" className='w-1/3 ' />
     <Icon path={mdiChartBar} color="white" className='w-1/3 ' />
-    
+    <Logout></Logout>
     </div>
     <div className='h-1/5 flex items-center justify-center  '>
 

@@ -8,7 +8,9 @@ const WelcomeComponent = () => {
     return <p>Loading...</p>;
   }
 
-  return <h1>Welcome, {user.username}!</h1>;
+  return <div className='custom'>
+    <h1 className=''>Welcome, {user.username}!</h1>
+    </div>;
 };
 
 export default WelcomeComponent;

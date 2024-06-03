@@ -73,4 +73,6 @@ div::-webkit-scrollbar {
       width: 75%;
     }
   }
-  
+  .custom{
+    box-shadow: 2px 3px 3px black;
+  }

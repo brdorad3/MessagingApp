@@ -1,3 +1,4 @@
+// @ts-nocheck
 import 'dotenv/config'
 import express, { Request, Response } from "express";
 import routeS from "./route/route"
@@ -7,7 +8,7 @@ import * as LocalStrategy from "passport-local"
 import mongoose from "mongoose";
 import './passportConfig';
 import bcrypt from "bcrypt"
-import User from './models/user';
+import  User  from './models/user';
 import jwt from 'jsonwebtoken';
 import { UserDocument } from './models/user';
 import { Error } from 'mongoose';
@@ -37,6 +38,25 @@ app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(passport.initialize());
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } 
+}));
+
+app.use(passport.session());
+
+// Passport configuration
+passport.serializeUser((user: UserDocument, done: (err: any, id?: string) => void) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id: string, done: (err: any, user?: UserDocument | null) => void) => {
+  User.findById(id, (err, user) => {
+      done(err, user);
+  });
+});
 
 app.use("/", routeS)
 
@@ -91,6 +111,27 @@ app.post('/login', (req, res, next) => {
 app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({ message: 'This is a protected route' });
 });
+
+// Logout route
+
+app.post('/logout', (req: Request, res: Response) => {
+  console.log('Logout request received');
+  req.logout((err) => {
+      if (err) {
+          console.error('Logout error:', err);
+          return res.status(500).json({ error: 'Failed to log out' });
+      }
+      req.session.destroy((err) => {
+          if (err) {
+              console.error('Session destruction error:', err);
+              return res.status(500).json({ error: 'Failed to destroy session' });
+          }
+          console.log('Logout successful');
+          res.status(200).json({ message: 'Logged out successfully' });
+      });
+  });
+});
+
 
 app.listen(3000, () => {
   console.log("err, connected!")

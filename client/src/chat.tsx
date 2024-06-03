@@ -49,7 +49,9 @@ function Chat(){
         <Icon path={mdiAccountCircle} color="black" size={2}/>
         <WelcomeComponent></WelcomeComponent>
         </div>
-        <div className="h-5/6 flex flex-col items-center justify-center bg-slate-200 mx-5 rounded-lg">
+
+        {chat ? (<div className="h-5/6 flex flex-col items-center justify-center bg-slate-200 mx-5 rounded-lg">
+        
         <div className="w-full h-4/5">
             <div className='w-full h-16 bg-slate-400 flex items-center px-7 gap-3 rounded-t-md justify-between'>
                 <div className='flex gap-3 items-center'>
@@ -60,18 +62,20 @@ function Chat(){
             </div>
             <Icon path={mdiDotsVertical} size={1} className='cursor-pointer'/>
             </div>
-            {messages && messages.length > 0 ? (
-    messages.some(i => chat === i.to.username) ? (
-        messages.map((i) => (
-            chat === i.to.username && <div key={i._id}>{i.content}</div>
-        ))
-    ) : (
-        <div>No messages yet</div>
-    )
-) : (
-    <div>No messages yet</div>
-)}
-   
+            {
+                  messages && messages.length > 0 ? (
+                    messages.some(i => chat === i.to.username) ? (
+                        messages.map((i) => (
+                            chat === i.to.username && <div key={i._id}>{i.content}</div>
+                        ))
+                    ) : (
+                        <div>No messages yet</div>
+                    )
+                ) : (
+                    <div>No messages yet</div>
+                )
+                   
+            }
         </div>
         <div className="w-full h-1/5 bg-kombu flex items-center justify-center gap-5">
             <input type="text" name='message'
@@ -85,7 +89,11 @@ function Chat(){
             <Icon path={mdiSend} size={1.3} color="white" />
             </div>
         </div>
-        </div>
+        </div>):(
+            <div className='flex items-center justify-center h-5/6'>Start chatting!</div>
+        )}
+
+        
         </div>
     )
 }
