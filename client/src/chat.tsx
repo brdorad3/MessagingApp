@@ -5,7 +5,7 @@ import WelcomeComponent from './testcomp';
 import { useChat } from './chatContext';
 import { mdiDotsVertical } from '@mdi/js';
 import axios from 'axios';
-import { useContext, useState} from 'react';
+import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
 
 
@@ -16,7 +16,8 @@ function Chat(){
     const {chat} = useChat();
     const [mess, setMess] = useState('');
     const [data, setData] = useState();
-
+    const [messages, setMessages] = useState([]);
+    
     const handleClick = async() => {
         try{
             const res = await axios.post(`http://localhost:3000/${user._id}/message`, {mess, chat})
@@ -27,8 +28,21 @@ function Chat(){
         console.log(mess)
         setMess('')
     }
+
+    const fetchData = async() => {
+        try{
+            const res = await axios(`http://localhost:3000/${user._id}/message`)
+            console.log(res.data)
+            setMessages(res.data)
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+    useEffect(()=>{
+        fetchData()
+    },[mess])
     
-    data && console.log(data)
     return (
         <div className="w-full h-screen">
         <div className="h-1/6 flex items-center pl-10 gap-2">
@@ -46,6 +60,18 @@ function Chat(){
             </div>
             <Icon path={mdiDotsVertical} size={1} className='cursor-pointer'/>
             </div>
+            {messages && messages.length > 0 ? (
+    messages.some(i => chat === i.to.username) ? (
+        messages.map((i) => (
+            chat === i.to.username && <div key={i._id}>{i.content}</div>
+        ))
+    ) : (
+        <div>No messages yet</div>
+    )
+) : (
+    <div>No messages yet</div>
+)}
+   
         </div>
         <div className="w-full h-1/5 bg-kombu flex items-center justify-center gap-5">
             <input type="text" name='message'

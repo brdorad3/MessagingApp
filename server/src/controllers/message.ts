@@ -19,7 +19,15 @@ const message_post = asyncHandler(async(req: Request, res: Response, next: NextF
     
 
 })
+const message_get = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+const message = await Message.find({}).populate("from").populate("to");
+
+console.log(message)
+res.json(message)
+
+})
 
 export{
-    message_post
+    message_post,
+    message_get
 }
