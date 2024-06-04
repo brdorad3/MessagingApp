@@ -35,16 +35,15 @@ const fetch_user_data = asyncHandler(async(req: Request, res: Response, next: Ne
     res.send(user)
 })
 const update_contacts = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body.contactInfo[0].username)
+    
     const user = await User.findById(req.params.id);
     const user2 = await User.find({username: req.body.contactInfo[0].username})
     const contactId = user2[0]._id as mongoose.Types.ObjectId
-    console.log(user)
-    console.log(user2)
+    
     
     if (!user?.contacts.includes(contactId)) {
-        user?.contacts.push(contactId); // Add contact ID to user's contacts array
-        await user?.save(); // Save the updated user document
+        user?.contacts.push(contactId); 
+        await user?.save(); 
         res.status(200).json(user);
     } else {
         res.status(400).json({ message: 'Contact already exists' });

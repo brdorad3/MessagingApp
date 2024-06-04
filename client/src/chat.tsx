@@ -7,6 +7,7 @@ import { mdiDotsVertical } from '@mdi/js';
 import axios from 'axios';
 import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
+import { mdiAlphaA } from '@mdi/js';
 
 
 
@@ -38,6 +39,8 @@ function Chat(){
             console.log(e)
         }
     }
+    console.log(messages)
+    console.log(mess)
 
     useEffect(()=>{
         fetchData()
@@ -62,20 +65,35 @@ function Chat(){
             </div>
             <Icon path={mdiDotsVertical} size={1} className='cursor-pointer'/>
             </div>
-            {
-                  messages && messages.length > 0 ? (
-                    messages.some(i => chat === i.to.username) ? (
-                        messages.map((i) => (
-                            chat === i.to.username && <div key={i._id}>{i.content}</div>
-                        ))
-                    ) : (
-                        <div>No messages yet</div>
-                    )
-                ) : (
-                    <div>No messages yet</div>
-                )
-                   
-            }
+            <div className="p-8">
+                        {messages && messages.length > 0 ? (
+                            messages.filter(i => (i.to.username === chat && i.from.username === user.username) || (i.from.username === chat && i.to.username === user.username)).length > 0 ? (
+                                messages.filter(i => (i.to.username === chat && i.from.username === user.username) || (i.from.username === chat && i.to.username === user.username)).map((i) => (
+                                    <div key={i._id} className={i.from.username === user.username ? 'message-from' : 'message-to'}>
+                                        {i.from.username === user.username ? (
+                                            <div className='w-full text-right flex flex-col justify-end'>
+                                                <div>{new Date(i.date).toLocaleString()}</div>
+                                                <div ><p className='bg-white p-3 self-end' >{i.content}</p></div>
+                                                
+                                            </div>
+                                        ) : (
+                                            <div className='flex gap-5 w-full text-left'>
+                                                <div>{i.content}</div>
+                                                <div>{new Date(i.date).toLocaleString()}</div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))
+                            ) : (
+                                <div>No messages yet</div>
+                            )
+                        ) : (
+                            <div>No messages yet</div>
+                        )}
+                    </div>
+               
+
+
         </div>
         <div className="w-full h-1/5 bg-kombu flex items-center justify-center gap-5">
             <input type="text" name='message'
@@ -90,7 +108,12 @@ function Chat(){
             </div>
         </div>
         </div>):(
-            <div className='flex items-center justify-center h-5/6'>Start chatting!</div>
+            <div className='flex flex-col items-center justify-center h-5/6 '>
+                <div className='flex flex-col border-4 border-kombu items-center justify-center p-14 shadow-2xl shadow-black mb-16 sm: w-4/5'>
+                <Icon path={mdiAlphaA} size={5} className='text-kombu'/>
+                <p>Welcome to Robnite! Start chatting by adding some users.</p>
+                </div>
+            </div>
         )}
 
         
