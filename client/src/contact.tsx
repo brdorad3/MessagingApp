@@ -9,6 +9,7 @@ function Contact({contactInfo}){
     const { setChat } = useChat();
 
     const handleClick = async() => {
+        console.log(contactInfo)
         await axios.post(`http://localhost:3000/${user._id}/update`, {contactInfo})
     }
 

@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 function Contacts(){
-    const [search, setSearch] = useState({}); 
+    const [search, setSearch] = useState(null); 
     const [response, setResponse] = useState({});
     const [empty, setEmpty] = useState(false)
 
@@ -16,12 +16,13 @@ function Contacts(){
             const res = await axios.post("http://localhost:3000/contacts", {search});
             setResponse(res.data);
             setEmpty(true)
+            
            // console.log(response)
         }catch(e){
             console.log(e)
         }
     }
-
+console.log(search)
 
 
     return (

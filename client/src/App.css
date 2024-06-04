@@ -76,3 +76,12 @@ div::-webkit-scrollbar {
   .custom{
     box-shadow: 2px 3px 3px black;
   }
+
+  .cc{
+    max-height: 459px;
+  }
+  .fam{
+    font-family: 'Arvo', serif;
+    
+    font-size: 1.4rem;
+  }
