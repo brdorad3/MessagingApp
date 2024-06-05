@@ -2,8 +2,12 @@ import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
 import axios from 'axios';
 import { useChat } from './chatContext';
+import Icon from '@mdi/react';
+import { mdiAccountCircle } from '@mdi/js';
+import { mdiCheckAll } from '@mdi/js';
 
-function Contact({contactInfo}){
+
+function Contact({contactInfo, loading}){
     const { user } = useContext(UserContext);
     const [info, setInfo] = useState({});
     const { setChat } = useChat();
@@ -35,10 +39,12 @@ setChat(e.target.innerText)
 
     return(
         
-        <div className="flex flex-col gap-10 w-full justify-center items-center ">
-            {contactInfo.length > 0 ? (
+        <div className="flex flex-col  w-full justify-center items-center ">
+           {loading ? (
+                <p></p>
+            ) : contactInfo.length > 0 ? (
                 contactInfo.map((i) => (
-                    <div key={i._id} className="w-4/5 gb h-20 rounded-xl flex justify-between items-center">
+                    <div key={i._id} className="w-4/5 bg h-20 rounded-xl flex justify-between items-center">
                         <p>{i.username}</p>
                         <button onClick={handleClick}>chat</button>
                     </div>
@@ -48,8 +54,17 @@ setChat(e.target.innerText)
             )}
             {info.contacts && info.contacts.length > 0 ? (
                 info.contacts.map((i) => (
-                    <div key={i._id} className="w-4/5 gb h-20 rounded-xl" onClick={(e)=>handleChats(e)}>
-                        <p>{i.username}</p>
+                    
+                    <div key={i._id} className="w-full flex items-center gap-3 border-t-2 border-grey h-20 px-6 justify-between py-10" >
+                       <div className='flex gap-2 items-center'>
+                        <Icon path={mdiAccountCircle} size={2.4}></Icon>
+                        <div className='w-4/5'>
+                        <p className='text-lg' onClick={(e)=>handleChats(e)}>{i.username}</p>
+                        <p className='text-xs truncate text-gray-700'>{i.about_me}</p>
+                        </div>
+                        </div>
+                        <Icon path={mdiCheckAll} size={0.8} className='text-kombu' />
+                        
                     </div>
                 ))
             ) : (

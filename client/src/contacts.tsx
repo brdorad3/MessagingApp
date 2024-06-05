@@ -9,13 +9,13 @@ import axios from "axios";
 function Contacts(){
     const [search, setSearch] = useState(null); 
     const [response, setResponse] = useState({});
-    const [empty, setEmpty] = useState(false)
+    const [empty, setEmpty] = useState(true)
 
     const handleClick = async() => {
         try{
             const res = await axios.post("http://localhost:3000/contacts", {search});
             setResponse(res.data);
-            setEmpty(true)
+            setEmpty(false)
             
            // console.log(response)
         }catch(e){
@@ -42,7 +42,7 @@ console.log(search)
         </div>
         </div>
         
-        <Contact contactInfo = {response} />
+        <Contact contactInfo = {response} loading={empty}/>
         
         
         </div>

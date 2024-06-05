@@ -72,7 +72,7 @@ const Profile = () => {
 <input type="text" placeholder='Write...' className=' w-2/3 h-1/2 rounded-xl px-3' 
 value={about}
 minLength={2}
-maxLength={250}
+maxLength={40}
 onChange={(e)=>setAbout(e.target.value)}
 />
 </div>

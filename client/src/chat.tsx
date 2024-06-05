@@ -12,12 +12,15 @@ import { mdiAlphaA } from '@mdi/js';
 
 
 
+
 function Chat(){
     const { user } = useContext(UserContext);
     const {chat} = useChat();
     const [mess, setMess] = useState('');
     const [data, setData] = useState();
     const [messages, setMessages] = useState([]);
+    
+  
     
     const handleClick = async() => {
         try{
@@ -72,13 +75,13 @@ function Chat(){
                                         {i.from.username === user.username ? (
                                             <div className='w-full  flex flex-col items-end'>
                                                 <div>{new Date(i.date).toLocaleString()}</div>
-                                                <div ><p className='bg-kombu text-white py-2 px-3 self-end rounded-es-lg' >{i.content}</p></div>
+                                                <div className='flex  max-w-md '><p className='bg-kombu flex overflow-hidden flex-wrap text-white py-2 px-3 self-end rounded-es-lg' >{i.content}</p></div>
                                                 
                                             </div>
                                         ) : (
                                             <div className='flex flex-col items-start '>
                                                 <div>{new Date(i.date).toLocaleString()}</div>
-                                                <div><p className='bg-white py-2 px-3 rounded-ee-lg '>{i.content}</p></div>
+                                                <div><p className='bg-white flex flex-wrap overflow-hidden py-2 px-3 rounded-ee-lg max-w-md'>{i.content}</p></div>
                                                 
                                             </div>
                                         )}
@@ -98,7 +101,7 @@ function Chat(){
         <div className="w-full h-1/5 bg-kombu flex items-center justify-center gap-5 ">
             <div className='relative w-4/5 flex items-center justify-center h-4/5 relative'>
             <input type="text" name='message'
-             placeholder="Message..." className="w-full h-1/2 rounded-xl px-3 border-2 border-black border-sol"
+             placeholder="Message..." className="w-full h-1/2 rounded-xl pl-3 pr-12 border-2 border-black border-sol"
              onChange={(e)=>setMess(e.target.value)}
              value={mess}
              minLength={1}
