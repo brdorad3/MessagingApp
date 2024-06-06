@@ -9,16 +9,17 @@
     
 }
 .width{
-    min-width: 5.5%;
-    max-width: 5.5%;
+   min-width: 5.5%;
+   max-width: 5.5%;
 }
 .bbw{
     border-bottom: solid 1px white;
 }
 @media screen and (max-width:950px) {
-    .width{
-        width: 10%;
-    }
+   .width{
+    max-width: 12%;
+    min-width: 12%;
+   }
 }
 .btw{
     border-top: solid 1px white;
@@ -72,6 +73,11 @@ div::-webkit-scrollbar {
       top: 45%;
       width: 75%;
     }
+    .greyb{
+      width: 100%;
+     padding-left: 0px;
+    }
+    
   }
   .custom{
     box-shadow: 2px 3px 3px black;
@@ -85,3 +91,4 @@ div::-webkit-scrollbar {
     
     font-size: 1.4rem;
   }
+  

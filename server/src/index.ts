@@ -61,7 +61,7 @@ passport.deserializeUser((id: string, done: (err: any, user?: UserDocument | nul
 app.use("/", routeS)
 
 app.post('/register',[
-  body("username").isLength({min:5, max: 20}).escape().withMessage("Username must be specified")
+  body("username").isLength({min:4, max: 20}).escape().withMessage("Username must be specified")
   .custom(async (value) => {
     const user = await User.findOne({ username: value });
     if (user) {
@@ -83,7 +83,6 @@ app.post('/register',[
             return res.status(400).json({ errors: errors.array() });
         }
 
-    console.log(req.body)
     const { username, password, confirm } = req.body;
     try {
       const hashedPassword = await bcrypt.hash(password, 10);

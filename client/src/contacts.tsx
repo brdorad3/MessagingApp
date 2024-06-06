@@ -16,18 +16,15 @@ function Contacts(){
             const res = await axios.post("http://localhost:3000/contacts", {search});
             setResponse(res.data);
             setEmpty(false)
-            
-           // console.log(response)
         }catch(e){
             console.log(e)
         }
     }
-console.log(search)
 
 
     return (
-        <div className="w-1/3 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden">
-            <div className="p-3 relative">
+        <div className="w-1/3 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden max-sm:hidden">
+            <div className="p-3 sm: p-0 relative">
         <input type="text"
         id="search"
         onChange={(e)=>setSearch(e.target.value)}

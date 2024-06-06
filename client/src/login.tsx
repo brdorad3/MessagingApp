@@ -1,11 +1,12 @@
+import "./registerv2.css"
 import { Link } from "react-router-dom"
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from './userContext';
 
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
+
+  const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { setUser } = useUserContext();
@@ -22,7 +23,6 @@ const Login: React.FC = () => {
       
           if (response.ok) {
             const { token, user } = await response.json();
-            // Save token and user info in the context
             setUser(user);
             localStorage.setItem('token', token);
             navigate('/');
@@ -30,42 +30,83 @@ const Login: React.FC = () => {
             console.error('Login failed');
           }
         };
-      
 
     return(
-        <>
-           <div className="w-screen h-screen flex items-center justify-center">
-            <div className="flex flex-col bg-kombu w-1/4 h-1/2 max-sm:w-2/3 max-xl:w-2/5 gap-6 ">
-                <div className="flex justify-center items-center py-5 bg-white xgb text-kombu font-black text-2xl">
-        <h1>Log in</h1>
-                </div>
-                
-                    <form action="#" onSubmit={handleLogin} className="flex flex-col items-center h-full gap-5">
-                        <div className="flex flex-col">
-                        <label htmlFor="username" className="text-white">Username: </label>
-                        <input type="text"
-                        name="username"
-                        value={username}
-                        onChange={(e)=> setUsername(e.target.value)}
-                        id="username" className="self-center h-7 rounded-sm" placeholder="Bob"/>
-                        </div>
-                        <div className="flex flex-col ">
-                        <label htmlFor="password" className="text-white">Password: </label>
-                        <input type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e)=> setPassword(e.target.value)}
-                        id="password" className="self-start h-7 rounded-sm" placeholder="********"/>
-                        </div>
-                        <div className="flex gap-8 items-center mt-7 ">
-                        <button className="text-white border-2 border-white px-2 py-1">Confirm</button>
-                        <Link to="/register" className="text-white">Sign up in instead</Link>
-                        </div>
-                    </form>
-                </div>
-            
+        <div className="leftandright">
+  <div className="left">
+    <img
+      className="img"
+      src="greg-rosenke-bJdK9v-VVw0-unsplash.jpg"
+      alt="plants"
+    />
+    <div className="txt">
+      <p className="boom">Robnite</p>
+    </div>
+    
+    
+  </div>
+  <div className="right">
+    <div className="text">
+      <h1 className="text-4xl" >
+        This is not a real online service! Lorem ipsum dolor sit amet
+        consectetur, adipisicing elit. Necessitatibus, commodi!
+      </h1>
+      <h2>Log in</h2>
+    </div>
+    <div className="form">
+      <form action="#" onSubmit={handleLogin}>
+        <div className="all">
+          <section>
+            <div className="leftt">
+              <div className="">
+                <label htmlFor="user" className="label">USERNAME</label>
+                <br />
+                <input
+                  type="text"
+                  id="user"
+                  name="username"
+                  placeholder="Bob"
+                  className="input"
+                  minLength={4}
+                  maxLength={25}
+                  value={username}
+                  onChange={(e)=> setUsername(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="">
+                <label htmlFor="pass" className="label">PASSWORD</label>
+                <br />
+                <input
+                  type="password"
+                  id="pass"
+                  name="password"
+                  placeholder="********"
+                  minLength={8}
+                  className="input"
+                  maxLength={25}
+                  value={password}
+                  onChange={(e)=> setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+          </section>
+         
         </div>
-        </>
+        <div className="foot">
+          <button type="submit" className="btn bg-kombu">
+            Log In
+          </button>
+          <p >
+            Don't have an account? <Link to="/register" className="text-kombu font-black">Sign up</Link>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     )
 }
 export default Login

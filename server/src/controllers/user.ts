@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const multer = require('multer');
 
 const register = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
-    console.log("kontakt")
+    res.send("w")
 })
 const register_get = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     res.send("kontakt")
@@ -19,7 +19,7 @@ const about_post = asyncHandler(async (req: Request, res: Response, next: NextFu
         }
         user.about_me = req.body.about;
         await user.save();
-        console.log(user)
+        
         res.status(200).json({ about_me: user.about_me });
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });

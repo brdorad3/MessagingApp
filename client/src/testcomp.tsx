@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from './userContext';
 
+
 const WelcomeComponent = () => {
   const { user } = useContext(UserContext);
 
@@ -8,7 +9,7 @@ const WelcomeComponent = () => {
     return <p>Loading...</p>;
   }
 
-  return <div className='custom'>
+  return <div className=''>
     <h1 className=''>Welcome, {user.username}!</h1>
     </div>;
 };

@@ -22,8 +22,8 @@ const Logout = () => {
     };
 
     return (
-        <button onClick={handleLogout}>
-            <Icon path={mdiLogout} size={1.1} color="white" className='hover:scale-110'/>
+        <button onClick={handleLogout} className='flex justify-center'>
+            <Icon path={mdiLogout} color="white" className='w-2/5 hover:scale-110 '/>
         </button>
     );
 };

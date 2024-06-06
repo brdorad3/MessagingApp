@@ -13,7 +13,6 @@ function Contact({contactInfo, loading}){
     const { setChat } = useChat();
 
     const handleClick = async() => {
-        console.log(contactInfo)
         await axios.post(`http://localhost:3000/${user._id}/update`, {contactInfo})
     }
 
@@ -57,7 +56,7 @@ setChat(e.target.innerText)
                     
                     <div key={i._id} className="w-full flex items-center gap-3 border-t-2 border-grey h-20 px-6 justify-between py-10" >
                        <div className='flex gap-2 items-center'>
-                        <Icon path={mdiAccountCircle} size={2.4}></Icon>
+                        <Icon path={mdiAccountCircle} className='min-w-14 max-w-14'></Icon>
                         <div className='w-4/5'>
                         <p className='text-lg' onClick={(e)=>handleChats(e)}>{i.username}</p>
                         <p className='text-xs truncate text-gray-700'>{i.about_me}</p>
