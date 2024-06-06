@@ -4,16 +4,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Icon from '@mdi/react';
 import { mdiLogout } from '@mdi/js';
+import "dotenv/config"
+
 
 
 
 const Logout = () => {
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
+    const API = process.env.SERVER_API
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:3000/logout');
+            await axios.post(`${API}/logout`);
             setUser(null);
             navigate('/login'); 
         } catch (error) {

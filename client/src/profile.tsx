@@ -7,6 +7,7 @@ import { mdiPencil } from '@mdi/js';
 import axios from 'axios';
 import { mdiCloseBoxOutline } from '@mdi/js';
 import Image from './image';
+import "dotenv/config"
 
 
 
@@ -16,6 +17,7 @@ const Profile = () => {
     const { user, setUser } = useContext(UserContext);
     const [toggle, setToggle] = useState(false)
     const [about, setAbout] = useState('')
+    const API = process.env.SERVER_API
     
     
     const handleClick = () => {
@@ -26,7 +28,7 @@ const Profile = () => {
         const formData = {about}
         setToggle(!toggle)
         try{
-           const response =  await axios.post(`http://localhost:3000/${user._id}/about`, formData)
+           const response =  await axios.post(`${API}/${user._id}/about`, formData)
            setUser((prevUser) => {
             if (prevUser) {
                 return { ...prevUser, about_me: about };

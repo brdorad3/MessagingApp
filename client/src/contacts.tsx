@@ -3,6 +3,7 @@ import Icon from '@mdi/react';
 import { mdiMagnify } from '@mdi/js';
 import { useState } from "react";
 import axios from "axios";
+import "dotenv/config"
 
 
 
@@ -10,10 +11,11 @@ function Contacts(){
     const [search, setSearch] = useState(null); 
     const [response, setResponse] = useState({});
     const [empty, setEmpty] = useState(true)
+    const API = process.env.SERVER_API
 
     const handleClick = async() => {
         try{
-            const res = await axios.post("http://localhost:3000/contacts", {search});
+            const res = await axios.post(`${API}/contacts`, {search});
             setResponse(res.data);
             setEmpty(false)
         }catch(e){

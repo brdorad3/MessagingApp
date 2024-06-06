@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "dotenv/config"
+
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -10,13 +12,14 @@ const Register = () => {
   const [confirm, setConfirm] = useState('');
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
+  const API = process.env.SERVER_API
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
 
 try {
-    const response = await axios.post('http://localhost:3000/register', { username, password, confirm });
+    const response = await axios.post(`${API}/register`, { username, password, confirm });
     setMessage(response.data.message);
     navigate("/login")
   } catch (error) {

@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import Icon from '@mdi/react';
 import { mdiSend } from '@mdi/js';
 import { mdiAccountCircle } from '@mdi/js';
@@ -18,12 +19,14 @@ function Chat(){
     const [mess, setMess] = useState('');
     const [data, setData] = useState();
     const [messages, setMessages] = useState([]);
+
+    const API = process.env.SERVER_API
     
   
     
     const handleClick = async() => {
         try{
-            const res = await axios.post(`http://localhost:3000/${user._id}/message`, {mess, chat})
+            const res = await axios.post(`${API}/${user._id}/message`, {mess, chat})
             setData(res)
         }catch(e){
             console.log(e)
@@ -34,7 +37,7 @@ function Chat(){
 
     const fetchData = async() => {
         try{
-            const res = await axios(`http://localhost:3000/${user._id}/message`)
+            const res = await axios(`${API}/${user._id}/message`)
             
             setMessages(res.data)
         }catch(e){

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from './userContext';
 import Demo from "./demo";
+import "dotenv/config"
+
 
 const Login: React.FC = () => {
 
@@ -11,10 +13,11 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { setUser } = useUserContext();
+    const API = process.env.SERVER_API
 
     const handleLogin = async(e: React.FormEvent) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`${API}/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
