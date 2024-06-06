@@ -67,7 +67,7 @@ form{
     height: 30px;
     padding: 0px 5px 0px 5px;
     box-shadow: 1px 2px 5px olive;
-    display: flex;
+    
     
 }
 .input:focus{
@@ -88,6 +88,9 @@ a{
 }
 .foot{
     margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .text{
     display: flex;

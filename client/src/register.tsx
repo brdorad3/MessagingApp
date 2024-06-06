@@ -48,7 +48,7 @@ try {
         This is not a real online service! Lorem ipsum dolor sit amet
         consectetur, adipisicing elit. Necessitatibus, commodi!
       </h1>
-      <h2>Sign up to get started</h2>
+      <h2 className="text-2xl">Sign up to get started</h2>
     </div>
     <div className="form">
       <form action="#" onSubmit={handleSubmit}>
@@ -105,7 +105,7 @@ try {
          
         </div>
         <div className="foot">
-          <button type="submit" className="btn bg-kombu">
+          <button type="submit" className="btn bg-kombu self-start">
             Create Account
           </button>
           <p>

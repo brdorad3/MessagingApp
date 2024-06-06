@@ -91,4 +91,6 @@ div::-webkit-scrollbar {
     
     font-size: 1.4rem;
   }
-  
+  .bgg{
+    background-color: rgb(196, 190, 190);
+  }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from './userContext';
+import Demo from "./demo";
 
 const Login: React.FC = () => {
 
@@ -51,7 +52,7 @@ const Login: React.FC = () => {
         This is not a real online service! Lorem ipsum dolor sit amet
         consectetur, adipisicing elit. Necessitatibus, commodi!
       </h1>
-      <h2>Log in</h2>
+      <h2 className="text-2xl">Log in</h2>
     </div>
     <div className="form">
       <form action="#" onSubmit={handleLogin}>
@@ -95,9 +96,12 @@ const Login: React.FC = () => {
          
         </div>
         <div className="foot">
+          <div className="flex gap-5">
           <button type="submit" className="btn bg-kombu">
             Log In
           </button>
+          <Demo/>
+          </div>
           <p >
             Don't have an account? <Link to="/register" className="text-kombu font-black">Sign up</Link>
           </p>

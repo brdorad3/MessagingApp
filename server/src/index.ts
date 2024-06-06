@@ -131,6 +131,22 @@ app.post('/logout', (req: Request, res: Response) => {
   });
 });
 
+app.get('/demo', async (req, res, next) => {
+  try {
+      const demoUser = await User.findOne({ username: 'admin@gmail.com' });
+      if (!demoUser) {
+          return res.status(404).json({ message: 'Demo user not found' });
+      }
+      req.login(demoUser, (err) => {
+          if (err) {
+              return next(err);
+          }
+      });
+  } catch (error) {
+      return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 app.listen(3000, () => {
   console.log("err, connected!")
