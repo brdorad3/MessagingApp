@@ -46,7 +46,7 @@ app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: { secure: false },
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
@@ -138,12 +138,15 @@ app.post('/logout', (req: Request, res: Response) => {
 
 app.get('/demo', async (req, res, next) => {
   try {
+    console.log("huh")
       const demoUser = await User.findOne({ username: 'admin@gmail.com' });
       if (!demoUser) {
+        console.log("no user")
           return res.status(404).json({ message: 'Demo user not found' });
       }
       req.login(demoUser, (err) => {
           if (err) {
+              console.log("radi?")
               return next(err);
           }
       });
