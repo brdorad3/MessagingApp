@@ -10,8 +10,12 @@ const Demo = () => {
         try {
             const response = await axios.get(`${API}/demo`);
             if (response.status === 200) {
+                console.log('Demo user logged in, navigating to home');
                 navigate('/');
-            }
+              } else {
+                console.error('Unexpected response status:', response.status);
+              }
+        
         } catch (error) {
             console.error('Failed to log in as demo user', error);
         }

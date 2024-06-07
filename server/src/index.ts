@@ -138,17 +138,14 @@ app.post('/logout', (req: Request, res: Response) => {
 
 app.get('/demo', async (req, res, next) => {
   try {
-    console.log("huh")
       const demoUser = await User.findOne({ username: 'admin@gmail.com' });
       if (!demoUser) {
-        console.log("no user")
           return res.status(404).json({ message: 'Demo user not found' });
       }
       req.login(demoUser, (err) => {
           if (err) {
               return next(err);
           }
-          console.log("radi?")
       });
   } catch (error) {
       return res.status(500).json({ message: 'Internal server error' });
