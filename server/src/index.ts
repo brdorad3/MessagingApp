@@ -46,7 +46,7 @@ app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false },
+  cookie: { secure: true },
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
@@ -146,9 +146,9 @@ app.get('/demo', async (req, res, next) => {
       }
       req.login(demoUser, (err) => {
           if (err) {
-              console.log("radi?")
               return next(err);
           }
+          console.log("radi?")
       });
   } catch (error) {
       return res.status(500).json({ message: 'Internal server error' });
