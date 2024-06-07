@@ -29,7 +29,7 @@ async function main() {
   
 }
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://messaging-gjn54n9sd-brdorads-projects.vercel.app/',
   credentials: true,
   optionSuccessStatus: 200
 };
@@ -46,7 +46,7 @@ app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false },
+  cookie: { secure: true },
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
