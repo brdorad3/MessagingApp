@@ -1,18 +1,35 @@
 import { useContext, useState, useEffect} from 'react';
 import { UserContext } from './userContext';
 import axios from 'axios';
-import { useChat } from './chatContext';
 import Icon from '@mdi/react';
 import { mdiAccountCircle } from '@mdi/js';
 import { mdiCheckAll } from '@mdi/js';
 import SERVER_API from "./url";
+import ChatContext from './chatContext';
+
+interface ContactInfo {
+    _id: string;
+    username: string;
+    about_me?: string;
+}
+
+interface ContactProps {
+    contactInfo: ContactInfo[];
+    loading: boolean
+}
+
+interface InfoState {
+    contacts?: ContactInfo[];
+  }
 
 
-function Contact({contactInfo, loading}){
+function Contact({contactInfo, loading}: ContactProps){
+
     const { user } = useContext(UserContext);
-    const [info, setInfo] = useState({});
-    const { setChat } = useChat();
+    const [info, setInfo] = useState<InfoState>({});
+    const { setChat } = useContext(ChatContext) as {setChat: React.Dispatch<React.SetStateAction<string | null>>}
     const API = SERVER_API
+
 
     const handleClick = async() => {
         await axios.post(`${API}/${user?._id}/update`, {contactInfo})
@@ -28,8 +45,8 @@ function Contact({contactInfo, loading}){
             console.log(e)
         }
     }
-    const handleChats = (e) => {
-setChat(e.target.innerText)
+    const handleChats = (e: React.MouseEvent<HTMLParagraphElement>) => {
+setChat(e.currentTarget.innerText)
 
     }
     

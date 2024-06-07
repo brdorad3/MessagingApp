@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect, ReactNode, FC, useContext } 
 interface User {
   username: string;
   _id: string
+  about_me: string
 }
 
 interface UserContextValue {
@@ -46,5 +47,4 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
   );
 };
 
-// Custom hook to use the UserContext
 export const useUserContext = () => useContext(UserContext);

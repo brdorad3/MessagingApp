@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 
 interface ChatContextType {
@@ -12,8 +12,12 @@ export const useChat = () => {
     return useContext(ChatContext);
 };
 
-export const ChatProvider = ({ children }) => {
-    const [chat, setChat] = useState(null);
+interface ChatProviderProps{
+    children: ReactNode
+}
+
+export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+    const [chat, setChat] = useState<string | null>(null);
 
     return (
         <ChatContext.Provider value={{ chat, setChat }}>

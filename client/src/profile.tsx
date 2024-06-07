@@ -1,12 +1,12 @@
 import Icon from '@mdi/react';
-import { mdiAccountCircle } from '@mdi/js';
+
 import { useContext, useState} from 'react';
 import { UserContext } from './userContext';
 import Sidebar from './sidebar';
 import { mdiPencil } from '@mdi/js';
 import axios from 'axios';
 import { mdiCloseBoxOutline } from '@mdi/js';
-import Image from './image';
+
 import SERVER_API from "./url";
 
 
@@ -27,7 +27,7 @@ const Profile = () => {
         const formData = {about}
         setToggle(!toggle)
         try{
-           const response =  await axios.post(`${API}/${user._id}/about`, formData)
+           await axios.post(`${API}/${user?._id}/about`, formData)
            setUser((prevUser) => {
             if (prevUser) {
                 return { ...prevUser, about_me: about };
@@ -48,11 +48,11 @@ const Profile = () => {
             <Sidebar></Sidebar>
             
             <div className='w-screen p-16 flex flex-col gap-14'>
-            <Image  ></Image>
+            
     <div className='flex flex-col gap-10'>
         <h1 className='font-black text-3xl border-b-2 border-black'>About me</h1>
         <div className='w-2/3 sm:w-4/5 flex gap-8'>
-            {user.about_me ? <p>{user.about_me}</p>: <p>Write something about yourself</p>}
+            {user?.about_me ? <p>{user?.about_me}</p>: <p>Write something about yourself</p>}
         
         <div onClick={handleClick}>
         <Icon path={mdiPencil} size={1}  className='self-start'/>

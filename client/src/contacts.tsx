@@ -7,8 +7,9 @@ import SERVER_API from "./url";
 
 
 function Contacts(){
-    const [search, setSearch] = useState(null); 
-    const [response, setResponse] = useState({});
+
+    const [search, setSearch] = useState(''); 
+    const [response, setResponse] = useState([]);
     const [empty, setEmpty] = useState(true)
     const API = SERVER_API
 
@@ -16,6 +17,7 @@ function Contacts(){
         try{
             const res = await axios.post(`${API}/contacts`, {search});
             setResponse(res.data);
+            console.log(search)
             setEmpty(false)
         }catch(e){
             console.log(e)
@@ -40,7 +42,7 @@ function Contacts(){
         </div>
         </div>
         
-        <Contact contactInfo = {response} loading={empty}/>
+        <Contact contactInfo = {response} loading = {empty}/>
         
         
         </div>
