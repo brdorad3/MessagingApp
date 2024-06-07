@@ -1,6 +1,12 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const ChatContext = createContext(null);
+
+interface ChatContextType {
+    chat: string | null;
+    setChat: React.Dispatch<React.SetStateAction<string | null>>;
+  }
+  
+  const ChatContext = createContext<ChatContextType | null>(null);
 
 export const useChat = () => {
     return useContext(ChatContext);
@@ -15,3 +21,5 @@ export const ChatProvider = ({ children }) => {
         </ChatContext.Provider>
     );
 };
+
+export default ChatContext

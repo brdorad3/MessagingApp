@@ -6,7 +6,7 @@ import session from "express-session";
 import passport from "passport";
 import * as LocalStrategy from "passport-local"
 import mongoose from "mongoose";
-import connectMongo from 'connect-mongo';
+import MongoStore from 'connect-mongo'
 import './passportConfig';
 import bcrypt from "bcrypt"
 import  User  from './models/user';
@@ -40,14 +40,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(passport.initialize());
 
-const MongoStore = connectMongo(session);
+
 
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
 app.use(passport.session());

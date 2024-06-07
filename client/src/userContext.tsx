@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode, FC, useContext } 
 
 interface User {
   username: string;
+  _id: string
 }
 
 interface UserContextValue {

@@ -4,15 +4,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Icon from '@mdi/react';
 import { mdiLogout } from '@mdi/js';
-import "dotenv/config"
-
+import SERVER_API from "./url";
 
 
 
 const Logout = () => {
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
-    const API = process.env.SERVER_API
+    const API = SERVER_API
 
     const handleLogout = async () => {
         try {

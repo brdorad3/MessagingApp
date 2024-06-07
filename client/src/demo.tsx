@@ -1,10 +1,10 @@
-import "dotenv/config"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import SERVER_API from "./url";
 
 const Demo = () => {
     const navigate = useNavigate();
-    const API = process.env.SERVER_API
+    const API = SERVER_API
 
     const handleDemoLogin = async () => {
         try {

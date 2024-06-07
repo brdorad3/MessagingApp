@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from './userContext';
 import Demo from "./demo";
-import "dotenv/config"
+import SERVER_API from "./url";
 
 
 const Login: React.FC = () => {
@@ -13,7 +13,7 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { setUser } = useUserContext();
-    const API = process.env.SERVER_API
+    const API = SERVER_API
 
     const handleLogin = async(e: React.FormEvent) => {
         e.preventDefault();

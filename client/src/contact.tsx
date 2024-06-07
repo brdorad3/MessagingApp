@@ -5,23 +5,22 @@ import { useChat } from './chatContext';
 import Icon from '@mdi/react';
 import { mdiAccountCircle } from '@mdi/js';
 import { mdiCheckAll } from '@mdi/js';
-import "dotenv/config"
-
+import SERVER_API from "./url";
 
 
 function Contact({contactInfo, loading}){
     const { user } = useContext(UserContext);
     const [info, setInfo] = useState({});
     const { setChat } = useChat();
-    const API = process.env.SERVER_API
+    const API = SERVER_API
 
     const handleClick = async() => {
-        await axios.post(`${API}/${user._id}/update`, {contactInfo})
+        await axios.post(`${API}/${user?._id}/update`, {contactInfo})
     }
 
     const fetchData = async() => {
         try{
-            const res = await fetch(`${API}/${user._id}/fetch`)
+            const res = await fetch(`${API}/${user?._id}/fetch`)
             const data = await res.json()
             setInfo(data)
         }

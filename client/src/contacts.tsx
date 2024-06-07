@@ -3,15 +3,14 @@ import Icon from '@mdi/react';
 import { mdiMagnify } from '@mdi/js';
 import { useState } from "react";
 import axios from "axios";
-import "dotenv/config"
-
+import SERVER_API from "./url";
 
 
 function Contacts(){
     const [search, setSearch] = useState(null); 
     const [response, setResponse] = useState({});
     const [empty, setEmpty] = useState(true)
-    const API = process.env.SERVER_API
+    const API = SERVER_API
 
     const handleClick = async() => {
         try{

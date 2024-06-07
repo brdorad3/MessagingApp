@@ -1,9 +1,7 @@
-import 'dotenv/config'
 import Icon from '@mdi/react';
 import { mdiSend } from '@mdi/js';
 import { mdiAccountCircle } from '@mdi/js';
 import WelcomeComponent from './testcomp';
-import { useChat } from './chatContext';
 import { mdiDotsVertical } from '@mdi/js';
 import axios from 'axios';
 import { useContext, useState, useEffect} from 'react';
@@ -11,23 +9,43 @@ import { UserContext } from './userContext';
 import { mdiAlphaA } from '@mdi/js';
 import { mdiCog } from '@mdi/js';
 import { Link } from 'react-router-dom';
-
+import ChatContext from './chatContext';
+import SERVER_API from './url';
 
 function Chat(){
     const { user } = useContext(UserContext);
-    const {chat} = useChat();
     const [mess, setMess] = useState('');
-    const [data, setData] = useState();
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
+    interface User {
+        username: string;
+        _id: string
+        password: string,
+        confirm: string,
+        about_me: string,
+        contacts: Array<object>
+      }
+    interface Message {
+        _id: string;
+        from: User;
+        to: User;
+        content: string;
+        date: string;
+        
+      }
+    
 
-    const API = process.env.SERVER_API
+    const API = SERVER_API
+    const { chat } = useContext(ChatContext) as { chat: string | null };
+
+    
     
   
     
     const handleClick = async() => {
         try{
-            const res = await axios.post(`${API}/${user._id}/message`, {mess, chat})
-            setData(res)
+            if(user){
+             await axios.post(`${API}/${user._id}/message`, {mess, chat})
+            }
         }catch(e){
             console.log(e)
         }
@@ -37,9 +55,11 @@ function Chat(){
 
     const fetchData = async() => {
         try{
-            const res = await axios(`${API}/${user._id}/message`)
+            if(user){
+            const res = await axios.get<Message[]>(`${API}/${user._id}/message`)
             
             setMessages(res.data)
+            }
         }catch(e){
             console.log(e)
         }
@@ -49,6 +69,7 @@ function Chat(){
     useEffect(()=>{
         fetchData()
     },[mess])
+
     
     return (
         <div className="w-full h-screen max-sm:flex max-sm:flex-col items-center ">
@@ -76,10 +97,10 @@ function Chat(){
             </div>
             <div className="p-8 overflow-scroll overflow-x-hidden cc">
                         {messages && messages.length > 0 ? (
-                            messages.filter(i => (i.to.username === chat && i.from.username === user.username) || (i.from.username === chat && i.to.username === user.username)).length > 0 ? (
-                                messages.filter(i => (i.to.username === chat && i.from.username === user.username) || (i.from.username === chat && i.to.username === user.username)).map((i) => (
+                            messages.filter(i => (i.to.username === chat && i.from.username === user?.username) || (i.from.username === chat && i.to.username === user?.username)).length > 0 ? (
+                                messages.filter(i => (i.to.username === chat && i.from.username === user?.username) || (i.from.username === chat && i.to.username === user?.username)).map((i) => (
                                     <div key={i._id} >
-                                        {i.from.username === user.username ? (
+                                        {i.from.username === user?.username ? (
                                             <div className='w-full  flex flex-col items-end'>
                                                 <div>{new Date(i.date).toLocaleString()}</div>
                                                 <div className='flex w-1/2 max-sm:w-1/2 justify-end'><p className='bg-kombu overflow-hidden flex over text-white py-2 px-3 self-end rounded-es-lg' >{i.content}</p></div>

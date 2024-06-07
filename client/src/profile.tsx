@@ -7,8 +7,7 @@ import { mdiPencil } from '@mdi/js';
 import axios from 'axios';
 import { mdiCloseBoxOutline } from '@mdi/js';
 import Image from './image';
-import "dotenv/config"
-
+import SERVER_API from "./url";
 
 
 
@@ -17,7 +16,7 @@ const Profile = () => {
     const { user, setUser } = useContext(UserContext);
     const [toggle, setToggle] = useState(false)
     const [about, setAbout] = useState('')
-    const API = process.env.SERVER_API
+    const API = SERVER_API
     
     
     const handleClick = () => {

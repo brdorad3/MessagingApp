@@ -3,8 +3,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "dotenv/config"
-
+import SERVER_API from "./url";
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +11,7 @@ const Register = () => {
   const [confirm, setConfirm] = useState('');
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
-  const API = process.env.SERVER_API
+  const API = SERVER_API
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
