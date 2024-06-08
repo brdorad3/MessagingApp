@@ -8,7 +8,7 @@ import ProtectedComponent from './procomp.tsx';
 import ProtectedRoute from './protected.tsx';
 import { UserProvider } from './userContext.tsx';
 import Profile from './profile.tsx';
-
+import Demo from './demo.tsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <Profile />,
+  },
+  {
+    path: '/demo',
+    element: <Demo />,
   },
 
   {

@@ -29,7 +29,7 @@ async function main() {
   
 }
 const corsOptions = {
-  origin: 'https://messaging-45ofcwhb1-brdorads-projects.vercel.app',
+  origin: 'http://localhost:5173',
   credentials: true,
   optionSuccessStatus: 200
 };
@@ -46,7 +46,7 @@ app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: { secure: false },
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
@@ -104,7 +104,7 @@ app.post('/register',[
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', { session: false }, (err: Error | null, user: UserDocument | false, info: { message: string } | undefined) => {
     if (err || !user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Your username or password are incorrect!' });
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
     return res.json({ token, user });

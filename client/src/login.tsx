@@ -13,6 +13,7 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { setUser } = useUserContext();
+    const [msg, setMsg] = useState('');
     const API = SERVER_API
 
     const handleLogin = async(e: React.FormEvent) => {
@@ -23,7 +24,8 @@ const Login: React.FC = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, password }),
-          });
+          })
+          
       
           if (response.ok) {
             const { token, user } = await response.json();
@@ -31,7 +33,8 @@ const Login: React.FC = () => {
             localStorage.setItem('token', token);
             navigate('/');
           } else {
-            console.error('Login failed');
+            const res = await response.json()
+            setMsg(res.message);
           }
         };
 
@@ -96,7 +99,9 @@ const Login: React.FC = () => {
               </div>
             </div>
           </section>
-         
+          {msg &&
+  <p>{msg}</p>
+  }
         </div>
         <div className="foot">
           <div className="flex gap-5">

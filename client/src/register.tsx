@@ -104,6 +104,8 @@ try {
               </div>
             </div>
           </section>
+          {message &&
+            <p>{message}</p>}
          
         </div>
         <div className="foot">
@@ -117,8 +119,6 @@ try {
       </form>
     </div>
   </div>
-  {message &&
-            <p>{message}</p>}
 </div>
 
     )
