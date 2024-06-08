@@ -46,7 +46,7 @@ app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false },
+  cookie: { secure: true },
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
