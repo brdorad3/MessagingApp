@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from './userContext';
-import Demo from "./demo";
 import SERVER_API from "./url";
 
 
