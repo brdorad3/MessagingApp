@@ -108,7 +108,6 @@ const Login: React.FC = () => {
           <button type="submit" className="btn bg-kombu">
             Log In
           </button>
-          <Demo/>
           </div>
           <p >
             Don't have an account? <Link to="/register" className="text-kombu font-black">Sign up</Link>
