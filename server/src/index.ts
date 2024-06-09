@@ -29,7 +29,7 @@ async function main() {
   
 }
 const corsOptions = {
-  origin: 'https://messaging-g0me5k000-brdorads-projects.vercel.app',
+  origin: 'https://messaging-jj3zhaxic-brdorads-projects.vercel.app',
   credentials: true,
   optionSuccessStatus: 200
 };

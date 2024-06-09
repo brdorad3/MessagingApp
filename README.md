@@ -1,7 +1,7 @@
 # MessagingApp
 
 # url
-https://messaging-g0me5k000-brdorads-projects.vercel.app
+https://messaging-jj3zhaxic-brdorads-projects.vercel.app
   
 
 # login page
