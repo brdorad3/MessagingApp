@@ -7,7 +7,7 @@
 # <a href="https://messaging-jj3zhaxic-brdorads-projects.vercel.app">Live Preview</a>
 
 # Built with
-- Typescript
+- TypeScript
 - React
 - Node/Express
 - MongoDB
