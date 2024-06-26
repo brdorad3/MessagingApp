@@ -33,7 +33,6 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200
 };
-
 app.use(cors(corsOptions))
 
 app.use(express.urlencoded({ extended: true }));
@@ -100,7 +99,7 @@ app.post('/register',[
   }
 ] );
 
-// User login route
+
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', { session: false }, (err: Error | null, user: UserDocument | false, info: { message: string } | undefined) => {
     if (err || !user) {
@@ -111,12 +110,12 @@ app.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-// Protected route
+
 app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({ message: 'This is a protected route' });
 });
 
-// Logout route
+
 
 app.post('/logout', (req: Request, res: Response) => {
   console.log('Logout request received');

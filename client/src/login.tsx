@@ -39,7 +39,7 @@ const Login: React.FC = () => {
 
     return(
         <div className="leftandright">
-  <div className="left">
+  <div className="left max-sm:hidden">
     <img
       className="img"
       src="greg-rosenke-bJdK9v-VVw0-unsplash.jpg"
@@ -52,16 +52,16 @@ const Login: React.FC = () => {
     
   </div>
   <div className="right">
-    <div className="text">
-      <h1 className="text-4xl" >
+    <div className="text max-sm:items-center">
+      <h1 className="text-4xl max-sm:text-xl" >
         This is not a real online service! Lorem ipsum dolor sit amet
         consectetur, adipisicing elit. Necessitatibus, commodi!
       </h1>
       <h2 className="text-2xl">Log in</h2>
     </div>
-    <div className="form">
+    <div className="form ">
       <form action="#" onSubmit={handleLogin}>
-        <div className="all">
+        <div className="all max-md:justify-center">
           <section>
             <div className="leftt">
               <div className="">
@@ -102,13 +102,13 @@ const Login: React.FC = () => {
   <p>{msg}</p>
   }
         </div>
-        <div className="foot">
+        <div className="foot max-sm:items-center">
           <div className="flex gap-5">
           <button type="submit" className="btn bg-kombu">
             Log In
           </button>
           </div>
-          <p >
+          <p className="max-md:text-sm">
             Don't have an account? <Link to="/register" className="text-kombu font-black">Sign up</Link>
           </p>
         </div>

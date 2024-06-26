@@ -26,8 +26,8 @@ function Contacts(){
 
 
     return (
-        <div className="w-1/3 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden max-sm:hidden">
-            <div className="p-3 sm: p-0 relative">
+        <div className="w-1/3 bg-white  flex flex-col gap-20 items-center overflow-scroll overflow-x-hidden ">
+            <div className="p-3 sm: p-0 relative max-sm:hidden">
         <input type="text"
         id="search"
         onChange={(e)=>setSearch(e.target.value)}

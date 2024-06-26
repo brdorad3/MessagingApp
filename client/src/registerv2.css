@@ -151,3 +151,12 @@ h1,h2,h3{
 section{
     margin-bottom: 20px;
 }
+
+@media screen and (max-width:600px) {
+    .text, .leftt , .foot{
+        margin-left: 10px;
+    }
+}
+.hidden{
+    display: none;
+}

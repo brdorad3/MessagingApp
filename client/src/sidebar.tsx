@@ -11,7 +11,6 @@ import Logout from "./logout"
 
 function Sidebar(){
 
-   
 
     return(
     <>
@@ -22,7 +21,7 @@ function Sidebar(){
     <Link to="/" className='flex items-center justify-center'>
     <Icon path={mdiHomeOutline} color="white" className='w-2/5 hover:scale-110' />
     </Link>
-    <Icon path={mdiMessageText} color="white" className='w-1/3 hover:scale-110' />
+    <Icon path={mdiMessageText} color="white" className='w-1/3 hover:scale-110'  />
     <Icon path={mdiStarOutline} color="white" className='w-1/3 hover:scale-110' />
     <Icon path={mdiChartBar} color="white" className='w-1/3 hover:scale-110' />
     <Logout></Logout>

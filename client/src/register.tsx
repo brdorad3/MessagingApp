@@ -32,7 +32,7 @@ try {
 
     return(
         <div className="leftandright">
-  <div className="left">
+  <div className="left max-sm:hidden">
     <img
       className="img"
       src="greg-rosenke-bJdK9v-VVw0-unsplash.jpg"
@@ -45,8 +45,8 @@ try {
     
   </div>
   <div className="right">
-    <div className="text">
-      <h1 className="text-4xl" >
+    <div className="text max-sm:items-center">
+      <h1 className="text-4xl max-sm:text-xl" >
         This is not a real online service! Lorem ipsum dolor sit amet
         consectetur, adipisicing elit. Necessitatibus, commodi!
       </h1>
@@ -54,7 +54,7 @@ try {
     </div>
     <div className="form">
       <form action="#" onSubmit={handleSubmit}>
-        <div className="all">
+        <div className="all max-sm:justify-center">
           <section>
             <div className="leftt">
               <div className="">
@@ -108,8 +108,8 @@ try {
             <p>{message}</p>}
          
         </div>
-        <div className="foot">
-          <button type="submit" className="btn bg-kombu self-start">
+        <div className="foot max-sm:items-center">
+          <button type="submit" className="btn bg-kombu">
             Create Account
           </button>
           <p>

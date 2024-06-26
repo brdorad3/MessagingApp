@@ -73,12 +73,12 @@ setChat(e.currentTarget.innerText)
             {info.contacts && info.contacts.length > 0 ? (
                 info.contacts.map((i) => (
                     
-                    <div key={i._id} className="w-full flex items-center gap-3 border-t-2 border-grey h-20 px-6 justify-between py-10" >
+                    <div key={i._id} className="w-full flex items-center gap-3 border-t-2 border-grey h-20 px-6 justify-between py-10 max-sm:px-1" >
                        <div className='flex gap-2 items-center'>
-                        <Icon path={mdiAccountCircle} className='min-w-14 max-w-14'></Icon>
+                        <Icon path={mdiAccountCircle} className='min-w-14 max-w-14 max-sm:hidden'></Icon>
                         <div className='w-4/5'>
-                        <p className='text-lg' onClick={(e)=>handleChats(e)}>{i.username}</p>
-                        <p className='text-xs truncate text-gray-700'>{i.about_me}</p>
+                        <p className='text-lg max-sm:text-sm' onClick={(e)=>handleChats(e)}>{i.username}</p>
+                        <p className='text-xs truncate text-gray-700 max-sm:hidden'>{i.about_me}</p>
                         </div>
                         </div>
                         <Icon path={mdiCheckAll} size={0.8} className='text-kombu' />
